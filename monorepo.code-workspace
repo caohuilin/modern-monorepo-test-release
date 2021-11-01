@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "module-11",
+      "path": "packages/module-11/"
+    },
+    {
       "name": "module-10",
       "path": "packages/module-10/"
     },
