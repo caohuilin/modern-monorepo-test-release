@@ -1,5 +1,11 @@
 # module-10
 
+## 0.0.1
+
+### Patch Changes
+
+- fix: test
+
 ## 0.0.0
 
 ### Patch Changes
