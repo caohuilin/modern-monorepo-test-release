@@ -1,5 +1,11 @@
 # module-10
 
+## 0.0.0
+
+### Patch Changes
+
+- fff
+
 ## 0.0.0-2021101112449
 
 ### Patch Changes
