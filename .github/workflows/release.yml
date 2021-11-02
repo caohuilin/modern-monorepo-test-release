@@ -29,7 +29,7 @@ jobs:
 
       - name: Bump Canary Version
         if: ${{  github.event.inputs.release-version == 'canary' }}
-        run: pnpm run bump -- --snapshot canary
+        run: pnpm run bump -- --snapshot canary && pnpm run release -- --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
