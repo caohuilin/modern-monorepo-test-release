@@ -32,6 +32,7 @@ output_resource/
 !.vscode/settings.json
 !.vscode/extensions.json
 .idea/
+.pnpm-store/
 
 **/*/typings/auto-generated
 **/*/adapters/**/index.ts
