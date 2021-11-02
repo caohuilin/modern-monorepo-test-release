@@ -1,20 +1,40 @@
 name: Release
+
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
+      release-version:
+        description: 'Release Version(canary, pre, latest)'
         required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
+        default: 'canary'
 
 jobs:
-  say_hello:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Hello ${{ github.event.inputs.name }}!"
-          echo "- in ${{ github.event.inputs.home }}!"
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 14.x
+
+      - name: Init
+        run: npm install -g pnpm && pnpm run setup
+
+      - name: Prepare
+        run: pnpm run prepare --filter ./packages
+
+      - name: Bump Canary Version
+        if: ${{  github.event.inputs.release-version == 'canary' }}
+        run: pnpm run bump -- --snapshot canary --otp=${{ secrets.NPM_TOKEN }}
+
+      - name: Bump Pre Versin
+        if: ${{  github.event.inputs.release-version == 'pre' }}
+        run: pnpm run release -- --tag next --otp=${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Latest Version
+        if: ${{  github.event.inputs.release-version == 'latest' }}
+        run: pnpm run release -- --otp=${{ secrets.NPM_TOKEN }}
