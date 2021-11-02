@@ -44,9 +44,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Config git
-        run: git config --global user.email "modern@bytedance.com"&&git config --global user.name "modern"
-
       - name: Push tags
         run: chmod +x tag.sh && ./tag.sh
 
