@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      release-version:
+      version:
         description: 'Release Version(canary, pre, latest)'
         required: true
         default: 'canary'
@@ -13,37 +13,23 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
+      - name: Checkout Repo
+        uses: actions/checkout@master
         with:
-          node-version: '14.x'
-          registry-url: 'https://registry.npmjs.org'
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
-      - name: Init
-        run: npm install -g pnpm && pnpm run setup
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 14.x
 
-      - name: Prepare
-        run: pnpm run prepare --filter ./packages
-
-      - name: Bump Canary Version
-        if: ${{  github.event.inputs.release-version == 'canary' }}
-        run: pnpm run bump -- --snapshot canary && npx changeset publish --tag canary
+      - name: Release
+        uses: caohuilin/modern.js-release-action@master
+        with:
+          # this expects you to have a script called release which does a build for your packages and calls changeset publish
+          version: ${{ github.event.inputs.release-version }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Bump Pre Versin
-        if: ${{  github.event.inputs.release-version == 'pre' }}
-        run: npx changeset publish --tag next
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish Latest Version
-        if: ${{  github.event.inputs.release-version == 'latest' }}
-        run: npx changeset publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Push tags
-        run: chmod +x tag.sh && ./tag.sh
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
