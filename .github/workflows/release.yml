@@ -48,5 +48,5 @@ jobs:
         run: git config --global user.email "modern@bytedance.com"&&git config --global user.name "modern"
 
       - name: Push tags
-        run: git remote -v && git push --set-upstream origin main && git push --follow-tags
+        run: git remote -v && git push --set-upstream origin main && git tag -l && git push --follow-tags
 
