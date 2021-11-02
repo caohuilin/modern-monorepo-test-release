@@ -25,7 +25,7 @@ jobs:
           node-version: 14.x
 
       - name: Release
-        uses: caohuilin/modern.js-release-action@master
+        uses: caohuilin/modern.js-release-action@main
         with:
           # this expects you to have a script called release which does a build for your packages and calls changeset publish
           version: ${{ github.event.inputs.release-version }}
