@@ -1,5 +1,11 @@
 # @modern-js-test/module-10
 
+## 0.0.2
+
+### Patch Changes
+
+- feat: add tags
+
 ## 0.0.1
 
 ### Patch Changes

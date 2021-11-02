@@ -1,5 +1,11 @@
 # module-10
 
+## 0.0.3
+
+### Patch Changes
+
+- feat: add tags
+
 ## 0.0.2
 
 ### Patch Changes

@@ -34,15 +34,21 @@ jobs:
 
       - name: Bump Pre Versin
         if: ${{  github.event.inputs.release-version == 'pre' }}
-        run: npx changeset publish --tag next && git push --follow-tags
+        run: npx changeset publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Latest Version
         if: ${{  github.event.inputs.release-version == 'latest' }}
-        run: npx changeset publish && git push --follow-tags
+        run: npx changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push tags
+        if: ${{  github.event.inputs.release-version == 'latest' }}
+        run: git push --follow-tags
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
