@@ -45,5 +45,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push tags
-        run: ./tag.sh
+        run: chmod +x tag.sh && ./tag.sh
 
