@@ -7,6 +7,10 @@ on:
         description: 'Release Version(canary, pre, latest)'
         required: true
         default: 'canary'
+      branch:
+        description: 'Release Branch(confirm release branch)'
+        required: true
+        default: 'main'
 
 jobs:
   release:
@@ -20,11 +24,14 @@ jobs:
           fetch-depth: 0
 
       - name: Release
-        uses: caohuilin/modern.js-release-action@main
+        uses: modern-js-dev/actions@main
         with:
           # this expects you to have a script called release which does a build for your packages and calls changeset publish
           version: ${{ github.event.inputs.version }}
+          branch: ${{ github.event.inputs.branch }}
+          type: 'release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+          REPOSITORY: ${{ github.repository }}
+          REF: ${{ github.ref }}
