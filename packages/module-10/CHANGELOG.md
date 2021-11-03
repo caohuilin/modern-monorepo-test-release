@@ -1,5 +1,11 @@
 # module-10
 
+## 0.0.5-next.0
+
+### Patch Changes
+
+- b9f0076: test publish
+
 ## 0.0.4
 
 ### Patch Changes

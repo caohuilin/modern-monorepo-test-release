@@ -1,5 +1,11 @@
 # @modern-js-test/module-10
 
+## 0.0.4-next.0
+
+### Patch Changes
+
+- b9f0076: test publish
+
 ## 0.0.3
 
 ### Patch Changes
