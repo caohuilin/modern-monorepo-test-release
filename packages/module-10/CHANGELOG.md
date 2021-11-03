@@ -1,5 +1,11 @@
 # module-10
 
+## 0.1.0
+
+### Minor Changes
+
+- feat: publish
+
 ## 0.0.6
 
 ### Patch Changes
