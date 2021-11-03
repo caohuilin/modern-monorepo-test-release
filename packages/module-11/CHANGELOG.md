@@ -1,5 +1,11 @@
 # @modern-js-test/module-10
 
+## 0.0.5
+
+### Patch Changes
+
+- test publish
+
 ## 0.0.4
 
 ### Patch Changes

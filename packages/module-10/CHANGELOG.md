@@ -1,5 +1,11 @@
 # module-10
 
+## 0.0.6
+
+### Patch Changes
+
+- test publish
+
 ## 0.0.5
 
 ### Patch Changes
